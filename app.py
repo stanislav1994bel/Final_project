@@ -62,7 +62,7 @@ def predict_churn(age,car_own_flg,education_cd_GRD,appl_rej_cnt,Score_bki,income
 def main():
     html_temp = """
     <div style="background-color:white ;padding:10px">
-    <h2 style="color:red;text-align:center;">Кредитный скоринг</h2>
+    <h2 style="color:black;text-align:center;">Кредитный скоринг</h2>
     </div>
     """
     st.markdown(html_temp, unsafe_allow_html=True)
@@ -89,7 +89,7 @@ def main():
     income = st.slider("Зарплата", 0.00, 20000.00)
 
 
-    Air_flg = st.selectbox("Наличие загран паспорта (0=нет)", ['0', '1'])
+    Air_flg = st.selectbox("Наличие загран паспорта (1=да)", ['0', '1'])
 
 
     gender_cd_F = st.selectbox("Женщина (1=да)", ['0', '1'])
