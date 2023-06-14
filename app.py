@@ -49,8 +49,8 @@ model=pickle.load(open("model.pkl","rb"))
 #le1_pik=pickle.load(open("label_encoding_for_geo.pkl","rb"))
 
 
-def predict_churn(age,car_own_flg,appl_rej_cnt,Score_bki,income,Air_flg,gender_cd_F,gender_cd_M):
-    input = np.array([[age,car_own_flg,appl_rej_cnt,Score_bki,income,Air_flg,gender_cd_F,gender_cd_M]]).astype(np.float64)
+def predict_churn(age,car_own_flg,education_cd_GRD,appl_rej_cnt,Score_bki,income,Air_flg,gender_cd_F,gender_cd_M):
+    input = np.array([[age,car_own_flg,education_cd_GRD,appl_rej_cnt,Score_bki,income,Air_flg,gender_cd_F,gender_cd_M]]).astype(np.float64)
     if option == 'LogisticRegression':
         prediction = model.predict_proba(input)
         pred = '{0:.{1}f}'.format(prediction[0][0], 2)
@@ -78,9 +78,10 @@ def main():
 
 
     age = st.slider("Возраст", 18, 68)
-    car_own_flg = st.selectbox("Есть автомобиль (0=нет)?", ['0', '1'])
+    car_own_flg = st.selectbox("Есть автомобиль (1=да)?", ['0', '1'])
     Score_bki = st.slider('Скоринговый балл', 0, 400)
-
+    
+    education_cd_GRD = st.selectbox("Высшее образование (1=да)", ['0', '1'])
 
     appl_rej_cnt = st.slider('Количество отказанных прошлых заявок', 0, 20)
 
@@ -108,7 +109,7 @@ def main():
             """
 
     if st.button('Сделать прогноз'):
-        output = predict_churn(age,car_own_flg,appl_rej_cnt,Score_bki,income,Air_flg,gender_cd_F,gender_cd_M)
+        output = predict_churn(age,car_own_flg,education_cd_GRD,appl_rej_cnt,Score_bki,income,Air_flg,gender_cd_F,gender_cd_M)
         st.success('Вероятность дефолта составляет {}'.format(output))
 
 
